@@ -1,0 +1,46 @@
+ the first process order that i wrote using switch statement for catagories.cs
+ 
+            string userInput = Console.ReadLine();
+            int order;
+
+            if (int.TryParse(userInput, out order))
+            {
+                string OrderFoodType;
+                switch (order)
+                {
+                    case 1:
+                        OrderFoodType = " Coke - $2.00";
+                        break;
+                    case 2:
+                        OrderFoodType = " Fanta - $2.50";
+                        break;
+                    case 3:
+                        OrderFoodType = " Cocktail - $1.50 ";
+                        break;
+                    case 4:
+                        OrderFoodType = " Energy Drink - $3.50";
+                        break;
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid choice.");
+                        Console.ResetColor();
+                        return;
+                }
+
+                //collecting how many quantity the user wants
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("please enter quantity");
+                Console.ResetColor();
+                int UserOrderQuantity;
+                string orderQuantityInput = Console.ReadLine();
+
+                if (int.TryParse(orderQuantityInput, out UserOrderQuantity))
+                {
+
+                    // displaying quantity and order 
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.WriteLine("order confirmation: you have ordered: {0} quantity of {1}", UserOrderQuantity, OrderFoodType);
+                    Console.ResetColor();
+                }
+
+            }
