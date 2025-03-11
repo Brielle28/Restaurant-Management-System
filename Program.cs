@@ -1,6 +1,6 @@
 ﻿using Restaurant_Management_System;
 using System;
-using static Restaurant_Management_System.MainFood;
+using System.Collections.Generic;
 
 namespace RestaurantManagementSystem
 {
@@ -8,70 +8,69 @@ namespace RestaurantManagementSystem
     {
         static void Main(string[] args)
         {
-            //console app vars
-            string AppName = "Restaurant Management System", Version = "1.0.0";
+            // Console app vars
+            string appName = "Restaurant Management System";
+            string version = "1.0.0";
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("{0}: Version {1}", AppName, Version);
+            Console.WriteLine("{0}: Version {1}", appName, version);
             Console.ResetColor();
 
-            //welcome note 
-            Console.WriteLine("welcome to our resturant!, please choose what you want to have today");
-            
+            Console.WriteLine("Welcome! We're delighted to have you. Please enjoy your dining experience.");
 
-            //collecting user choice and displaying use of orders 
+            Console.WriteLine("How may we assist you today? Please choose from the following services:");
+            bool isServices = true;
 
-            bool Ordering = true;
-
-            while (Ordering)
+            while (isServices)
             {
-                //listing orders caterogry
-                string[] categories = { "1. Main Foods", "2 .Desserts", "3 .Appetizer", "4 .Drinks", "5.exit" };
 
-                foreach (string category in categories)
+                var services = new Dictionary<int, string>
                 {
-                    Console.WriteLine(category);
-                }
-                int UserOrderChoice;
-                string orderInput = Console.ReadLine();
-                UserOrderChoice = Int32.Parse(orderInput);
+                    { 1, "Place a Food Order" },
+                    { 2, "Reserve a Table" },
+                    { 3, "Speak to a customer care representative" },
+                    { 4, "exit the program" }
+                };
 
-                // switch case
-                switch (UserOrderChoice)
+                foreach (KeyValuePair<int, string> kv in services)
                 {
-                    case 1:
-                        MainFood mainCourse = new MainFood();
-                        mainCourse.DisplayFoods();
-                        break;
-                    case 2:
-                        Desserts dessert = new Desserts();
-                        dessert.DisplayFoods();
-                        break;
-                    case 3:
-                        Appetizer appetizer = new Appetizer();
-                        appetizer.DisplayFoods();
-                        break;
-                    case 4:
-                        Drinks drinks = new Drinks();
-                        drinks.DisplayFoods();
-                        break;
-                    case 5:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Exiting the program.....");
-                        Console.ResetColor();
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine("Thanks for your patronage!!!");
-                        Console.ResetColor();
-                        Ordering = false;
-                        break;
-                    default:
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Invalid choice,try again");
-                        Console.ResetColor();
-                        break;
-
+                    Console.WriteLine($"{kv.Key}. {kv.Value}");
                 }
 
+                string serviceUserInput = Console.ReadLine();
+                int serviceUserChoice;
 
+                if (int.TryParse(serviceUserInput, out serviceUserChoice))
+                {
+                    switch (serviceUserChoice)
+                    {
+                        case 1:
+                            OrderHandler.StartOrdering();
+                            break;
+                        case 2:
+                            TableReservation.ReserveTable();
+                            break;
+                        case 3:
+                            CustomerCare.SpeakToRepresentative();
+                            break;
+                        case 4:
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.WriteLine("Thanks for your patronage, wish to see you again later");
+                            Console.ResetColor();
+                            isServices = false;
+                            break;
+                        default:
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Invalid choice. Please select a valid option.");
+                            Console.ResetColor();
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    Console.ResetColor();
+                }
             }
         }
     }

@@ -1,58 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Restaurant_Management_System
 {
     public class ProcessOrder
     {
-
-        public static void Process0rder(string[] foodItems)
+        public static void processOrder(Dictionary<string, double> foodItems)
         {
             string userInput = Console.ReadLine();
             int order;
 
-            if (int.TryParse(userInput, out order))
+            if (int.TryParse(userInput, out order) && order >= 1 && order <= foodItems.Count())
             {
-                string OrderFoodType;
-
-                if (order >= 1 && order <= foodItems.Length)
-                {
-                    OrderFoodType = foodItems[order - 1];
-                }
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid choice.");
-                    Console.ResetColor();
-                    return;
-                }
+                var foodList = foodItems.ToList();
+                var selectedFood = foodList[order - 1];
 
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.Write("Please enter quantity:");
+                Console.Write("Please enter quantity: ");
                 Console.ResetColor();
                 string orderQuantityInput = Console.ReadLine();
-                int UserOrderQuantity;
+                int userOrderQuantity;
 
-                if (int.TryParse(orderQuantityInput, out UserOrderQuantity))
+                if (int.TryParse(orderQuantityInput, out userOrderQuantity) && userOrderQuantity > 0)
                 {
+                    double totalPrice = userOrderQuantity * selectedFood.Value;
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("Order confirmation: You have ordered {0} quantity of {1}", UserOrderQuantity, OrderFoodType);
+                    Console.WriteLine($"Order confirmation: {userOrderQuantity} plates of {selectedFood.Key}. your order cost ${totalPrice:F2}");
                     Console.ResetColor();
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid quantity.");
+                    Console.WriteLine("Invalid quantity. Please enter a positive number.");
                     Console.ResetColor();
                 }
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid input. Please enter a number.");
+                Console.WriteLine("Invalid choice. Please select a valid food item number.");
                 Console.ResetColor();
             }
         }
