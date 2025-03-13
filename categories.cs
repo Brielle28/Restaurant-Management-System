@@ -19,17 +19,17 @@ namespace Restaurant_Management_System
 
         public Dictionary<string, double> DrinksArray = new Dictionary<string, double>
         {
-            { "1. Coke", 2.00 },
-            { "2. Fanta", 2.50 },
-            { "3. Cocktail", 1.50 },
-            { "4. Energy Drink", 3.50 }
+            { "Coke", 2.00 },
+            { "Fanta", 2.50 },
+            { "Cocktail", 1.50 },
+            { "Energy Drink", 3.50 }
         };
         public Dictionary<string, double> AppetizerArray = new Dictionary<string, double>
         {
-            { "1. Pizza", 1.50 },
-            { "2. Donuts", 3.50 },
-            { "3. Beef Wraps", 2.50 },
-            { "4. Chips", 2.00 }
+            { "Pizza", 1.50 },
+            { "Donuts", 3.50 },
+            { "Beef Wraps", 2.50 },
+            { "Chips", 2.00 }
         };
 
         public Dictionary<string, double> DessertsArray = new Dictionary<string, double>
@@ -43,11 +43,6 @@ namespace Restaurant_Management_System
         // Generic method to display any array
         public static void DisplayArrays<TKey, TValue>(Dictionary<TKey, TValue> dictionary)
         {
-            //var foodList = dictionary.ToList();
-            //for (int i = 0; i < foodList.Count; i++)
-            //{
-            //    Console.WriteLine($"{i + 1}. {foodList[i].Key} - ${foodList[i].Value}");
-            //}
             int i = 1;
             foreach (var item in dictionary)
             {

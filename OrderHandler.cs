@@ -10,7 +10,9 @@ namespace Restaurant_Management_System
     {
         public static void StartOrdering()
         {
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(" which kind of food would you like");
+            Console.ResetColor();
             bool Ordering = true;
 
             while (Ordering)

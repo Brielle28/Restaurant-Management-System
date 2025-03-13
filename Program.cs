@@ -16,7 +16,7 @@ namespace RestaurantManagementSystem
             Console.ResetColor();
 
             Console.WriteLine("Welcome! We're delighted to have you. Please enjoy your dining experience.");
-
+            //Console.WriteLine("  ");
             Console.WriteLine("How may we assist you today? Please choose from the following services:");
             bool isServices = true;
 
@@ -44,7 +44,7 @@ namespace RestaurantManagementSystem
                     switch (serviceUserChoice)
                     {
                         case 1:
-                            OrderHandler.StartOrdering();
+                            OrderOptions.orderOptions();
                             break;
                         case 2:
                             TableReservation.ReserveTable();
